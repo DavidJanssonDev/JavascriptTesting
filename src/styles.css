@@ -1,0 +1,37 @@
+body {
+    font-family: system-ui, sans-serif;
+    display: flex;
+    justify-content: center;
+    margin: 2rem;
+}
+
+main {
+    width: 400px;
+}
+
+#todo-list {
+    list-style: none;
+    padding: 0;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0;
+}
+
+.todo-item.completed .text {
+    text-decoration: line-through;
+    color: #666;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.filters .filter-button.active {
+    font-weight: bold;
+}
