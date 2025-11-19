@@ -22,11 +22,11 @@ import {
 let state: TodoState = createEmptyState();
 
 /** DOM references for interactive elements. */
-const form = document.querySelector<HTMLFormElement>("#todo-form");
-const input = document.querySelector<HTMLInputElement>("#todo-input");
-const list = document.querySelector<HTMLUListElement>("#todo-list");
-const countSpan = document.querySelector<HTMLSpanElement>("#todo-count");
-const filterButtons = document.querySelectorAll<HTMLButtonElement>(".filter-button");
+const form: HTMLFormElement | null = document.querySelector<HTMLFormElement>("#todo-form");
+const input: HTMLInputElement | null = document.querySelector<HTMLInputElement>("#todo-input");
+const list: HTMLUListElement | null = document.querySelector<HTMLUListElement>("#todo-list");
+const countSpan: HTMLSpanElement | null = document.querySelector<HTMLSpanElement>("#todo-count");
+const filterButtons: NodeListOf<HTMLButtonElement> = document.querySelectorAll<HTMLButtonElement>(".filter-button");
 
 /** Renders the UI based on the current application state */
 function render(): void {
@@ -62,12 +62,12 @@ function render(): void {
     }
 
     // Update counter
-    const count = getItemsLeftCount(state);
+    const count: number = getItemsLeftCount(state);
     countSpan.textContent = count === 1 ? "1 item left" : `${count} item left`;
 
     // Update filter button active styles
     filterButtons.forEach((button) => {
-        const filter = button.dataset.filter as Filter | undefined;
+        const filter: Filter | undefined = button.dataset.filter as Filter | undefined;
         button.classList.toggle("active", filter === state.filter);
     });
 }
@@ -90,13 +90,13 @@ form?.addEventListener("submit", (event: SubmitEvent) => {
  * Handle toggle checkbox to complete/uncomplete todos.
  */
 list?.addEventListener("click", (event: MouseEvent) => {
-    const target = event.target as HTMLElement | null;
+    const target: HTMLElement | null = event.target as HTMLElement | null;
     if (!target?.matches("input.toggle-checkbox")) return;
 
-    const listItem = target.closest<HTMLElement>(".todo-item");
+    const listItem: HTMLElement | null = target.closest<HTMLElement>(".todo-item");
     if (!listItem?.dataset.id) return;
 
-    const id = Number(listItem.dataset.id);
+    const id: number = Number(listItem.dataset.id);
     state = toggleTodo(state, id);
     render();
 });
@@ -107,7 +107,7 @@ list?.addEventListener("click", (event: MouseEvent) => {
 
 filterButtons.forEach((button) => {
     button.addEventListener("click", () => {
-        const filter = button.dataset.filter;
+        const filter: string | undefined = button.dataset.filter;
         state = setFilter(state, filter ?? state.filter);
         render();
     });

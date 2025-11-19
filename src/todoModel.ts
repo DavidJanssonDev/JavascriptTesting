@@ -32,7 +32,7 @@ export interface TodoState {
 
     /** Current filter applied to the visible Todos. */
     filter: Filter;
-} 
+}
 
 
 /**
@@ -57,7 +57,7 @@ export function createEmptyState(): TodoState {
  */
 export function addTodo(state: TodoState, text: string): TodoState {
     const trimmed: string = text.trim();
- 
+
     if (!trimmed) return state;
 
     const newTodo: Todo = {
@@ -82,9 +82,9 @@ export function addTodo(state: TodoState, text: string): TodoState {
  */
 export function toggleTodo(state: TodoState, id: number): TodoState {
     return {
-        ...state, 
-        todos: state.todos.map((todo) => 
-            todo.id == id ? {...todo, completed: !todo.completed} : todo
+        ...state,
+        todos: state.todos.map((todo) =>
+            todo.id == id ? { ...todo, completed: !todo.completed } : todo
         )
     }
 }
@@ -99,7 +99,7 @@ export function toggleTodo(state: TodoState, id: number): TodoState {
  */
 export function setFilter(state: TodoState, filter: string): TodoState {
     if (filter === "all" || filter === "active" || filter === "completed") {
-        return {...state, filter};
+        return { ...state, filter };
     }
     return state
 }
@@ -124,5 +124,5 @@ export function getVisibleTodos(state: TodoState): Todo[] {
  * @returns {number} Count of unfinished Todos.
  */
 export function getItemsLeftCount(state: TodoState): number {
-    return state.todos.filter((todo) => !todo.completed).length   
+    return state.todos.filter((todo) => !todo.completed).length
 }
